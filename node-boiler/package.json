@@ -1,0 +1,45 @@
+{
+  "name": "nodejs-boiler-plate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build:lint": "eslint src/ test/",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "dev": "nodemon --exec \"set NODE_ENV=dev&& sls offline start  --host 0.0.0.0 --httpPort 3000\"",
+    "devbuild": "set NODE_ENV=dev && sls deploy --stage dev --aws-profile serverless4 --verbose",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.5",
+    "nodemailer": "^6.9.16",
+    "sequelize": "^6.37.5",
+    "sequelize-cli": "^6.6.2",
+    "serverless-http": "^3.2.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.25.9",
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.16.0",
+    "eslint-plugin-import": "^2.31.0",
+    "globals": "^15.13.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
+    "nodemon": "^3.1.7",
+    "serverless": "^4.4.14",
+    "serverless-offline": "^14.3.4"
+  }
+}

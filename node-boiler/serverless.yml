@@ -1,0 +1,54 @@
+service: express-serverless-hampton
+
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  stage: api
+
+functions:
+  app:
+    handler: handler.handler
+    events:
+      - httpApi:
+          path: /{proxy+} #  catch-all path 
+          method: ANY
+      - httpApi:
+          path: /users
+          method: GET
+      - httpApi:
+          path: /users
+          method: POST
+      - httpApi:
+          path: /login
+          method: POST
+      - httpApi:
+          path: /resendOtp
+          method: POST
+      - httpApi:
+          path: /otpMatch
+          method: POST
+      - httpApi:
+          path: /setPassword
+          method: POST
+      - httpApi:
+          path: /onBorading
+          method: POST
+
+plugins:
+  - serverless-offline
+
+custom:
+  dotenv:
+    path: .env
+  environment: ${opt:stage, 'dev'} # Default to 'dev' if no stage is provided
+  mediaBucketName: sample-media-${self:custom.environment} # Append environment to the base name
+
+resources:
+  Resources:
+    S3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.mediaBucketName} # Use a variable for the bucket name
